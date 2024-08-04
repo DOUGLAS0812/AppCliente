@@ -11,6 +11,25 @@ public class ClienteRepositorio
 {
     public List<Cliente> clientes = new List<Cliente>();
 
+    public void GravarDadosclientes()
+    {
+        var json = System.Text.Json.JsonSerializer.Serialize(clientes);
+
+        File.WriteAllText("clientes.txt", json);
+    }
+    
+    public void LerDadosclientes()
+    {
+        if(File.Exists("clientes.txt"))
+        {
+            var dados = File.ReadAllText("clientes.txt");
+
+            var clientesArquivo = System.Text.Json.JsonSerializer.Deserialize<List<Cliente>>(dados);
+
+            clientes.AddRange(clientesArquivo);
+        }   
+    }
+    
     public void ExcluirCliente()
     {
         Console.Clear();
