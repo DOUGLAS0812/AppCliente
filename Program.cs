@@ -1,7 +1,9 @@
-﻿namespace AppClientes;
+﻿using Repositorio;
+namespace AppClientes;
 
 class Program
 {
+    static ClienteRepositorio  _clienteRepositorio = new ClienteRepositorio(); 
     static void Main(string[] args)
     {
        while(true)
@@ -24,5 +26,53 @@ class Program
         Console.WriteLine("4 - Excluir Cliente");
         Console.WriteLine("5 - Sair");
         Console.WriteLine("-------------------");
+
+        EscolherOpcao();
+    }
+
+    static void EscolherOpcao()
+    {
+       Console.WriteLine("Escolha uma opção: ");
+        var opcao = Console.ReadLine();
+
+        switch (int.Parse(opcao))
+        {
+            case 1:
+                {
+                    _clienteRepositorio.CadastrarCliente();
+                    Menu();
+                    break;
+                } 
+            case 2:
+                {
+                    _clienteRepositorio.ExibirClientes();
+                    Menu();
+                    break;
+                }
+            case 3:
+                {
+                    _clienteRepositorio.EditarCliente();
+                    Menu();
+                    break;
+                }
+            case 4:
+                {
+                    _clienteRepositorio.ExcluirCliente();
+                    Menu();
+                    break;
+                }
+            case 5:
+                {
+                    Environment.Exit(0);
+                    break;
+                }
+            default:
+                {
+                    Console.Clear();
+                    Console.WriteLine("Opção Invalida");
+                    break;
+                }
+
+        }
     }
 }
